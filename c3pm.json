@@ -1,0 +1,11 @@
+{
+    "name": "okurache_filler",
+    "author": "Oleh Kurachenko",
+    "version": "0.0.1",
+    "description": "Study project from UNIT Factory (aka 42School Kiev)",
+    "url": "https://github.com/OlehKurachenko/filler.git",
+    "email": "oleh.kuracenko@gmail.com",
+    "dependencies": {},
+    "c3pm_version": "v0.2",
+    "whatIsC3pm": "https://github.com/c3pm/c3pm"
+}
