@@ -58,7 +58,13 @@ int main(void)
 		perror("bad VM");
 		return (0);
 	}
+	// Debug
 	ft_printf("debug: player number %d\n", player_n);
+	if (filler_run_game(sin, player_n))
+	{
+		perror("bad VM data");
+		return (0);
+	}
 
 	ft_printf("Unfinished!\n");
 	sin->vt->del(&sin);

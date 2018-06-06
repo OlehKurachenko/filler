@@ -21,7 +21,9 @@ SRC_DIR = src
 
 OBJ_DIR = obj
 
-SRC_N =	main.c
+SRC_N =	main.c \
+		filler_run_game.c \
+		filler_make_step.c
 
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC_N:.c=.o))
 
