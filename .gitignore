@@ -2,3 +2,5 @@ imports/**
 .c3pm_clonedir/**
 .idea/**
 cmake-build-debug/**
+src/exports/obj/**
+src/exports/okurache.filler
