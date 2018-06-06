@@ -13,10 +13,9 @@
 #ifndef FILLER_FILLER_H
 # define FILLER_FILLER_H
 
+#include <stdio.h>
 # include "../../../imports/okurache_libft/libft.h"
 # include "../../../imports/okurache_libftin/libftin.h"
 # include "../../../imports/okurache_ft_printf/ft_printf.h"
-
-
 
 #endif
