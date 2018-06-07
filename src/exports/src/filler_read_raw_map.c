@@ -34,10 +34,10 @@ static unsigned char	init_filler_map(t_filler_map *const map)
 	return (0);
 }
 
-unsigned char		filler_read_raw_map(t_fd_reader *const sin,
+unsigned char			filler_read_raw_map(t_fd_reader *const sin,
 		t_filler_map *const map)
 {
-	char 	dummy_buffer[7];
+	char	dummy_buffer[7];
 	size_t	i;
 
 	ft_memset(dummy_buffer, 0, 7);
@@ -48,9 +48,8 @@ unsigned char		filler_read_raw_map(t_fd_reader *const sin,
 	map->x = (unsigned)sin->vt->read_llint(sin);
 	if (!(map->x) || !(map->y))
 		return (1);
-	if (!map->raw)
-		if (init_filler_map(map))
-			return (1);
+	if (!map->raw && init_filler_map(map))
+		return (1);
 	sin->vt->pass_line(sin);
 	sin->vt->pass_line(sin);
 	i = 0;

@@ -78,8 +78,8 @@ void					filler_print_best_position(t_filler_map *const map,
 	int	i;
 	int	j;
 
-	i = 1 - token->y;
-	while (i < (int)map->y)
+	i = -(token->y);
+	while (++i < (int)map->y)
 	{
 		j = 1 - token->x;
 		while (j < (int)map->x)
@@ -96,7 +96,6 @@ void					filler_print_best_position(t_filler_map *const map,
 			}
 			++j;
 		}
-		++i;
 	}
 	ft_printf("%d %d\n", y, x);
 }

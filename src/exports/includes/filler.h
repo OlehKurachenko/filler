@@ -13,8 +13,8 @@
 #ifndef FILLER_FILLER_H
 # define FILLER_FILLER_H
 
-#include <stdio.h>
-#include <stdlib.h>
+# include <stdio.h>
+# include <stdlib.h>
 # include "../../../imports/okurache_libft/libft.h"
 # include "../../../imports/okurache_libftin/libftin.h"
 # include "../../../imports/okurache_ft_printf/ft_printf.h"
@@ -29,17 +29,17 @@ static const double	g_distance_to_opponent_w = 1.0;
 */
 static const double	g_distance_from_border_w = 1.0;
 
-typedef struct 		s_filler_map {
+typedef struct		s_filler_map {
 	char		**raw;
 	int			**bfs;
 	double		**points;
 	unsigned	x;
 	unsigned	y;
-	char 		my_char;
-	char 		op_char;
+	char		my_char;
+	char		op_char;
 }					t_filler_map;
 
-typedef struct 		s_filler_token {
+typedef struct		s_filler_token {
 	char		**raw;
 	unsigned	x;
 	unsigned	y;

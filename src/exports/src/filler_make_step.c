@@ -34,7 +34,7 @@ static unsigned char	init_filler_token(t_filler_token *const token,
 static unsigned char	read_raw_token(t_fd_reader *const sin,
 	t_filler_token *const token, t_filler_map *const map)
 {
-	char 	dummy_buffer[5];
+	char	dummy_buffer[5];
 	size_t	i;
 
 	ft_memset(dummy_buffer, 0, 5);
@@ -80,7 +80,7 @@ static unsigned char	check_map(t_filler_map *const map)
 	return (0);
 }
 
-static unsigned char 	check_token(t_filler_token *const token)
+static unsigned char	check_token(t_filler_token *const token)
 {
 	size_t i;
 	size_t j;
@@ -103,8 +103,8 @@ static unsigned char 	check_token(t_filler_token *const token)
 unsigned char			filler_make_step(t_fd_reader *const sin,
 	const unsigned char player_n)
 {
-	static t_filler_map	map = {NULL, NULL, NULL, 0, 0, 0, 0};
-	static t_filler_token token = {NULL, 0, 0};
+	static t_filler_map		map = {NULL, NULL, NULL, 0, 0, 0, 0};
+	static t_filler_token	token = {NULL, 0, 0};
 
 	map.my_char = (player_n == 1) ? 'O' : 'X';
 	map.op_char = (player_n == 1) ? 'X' : 'O';
@@ -116,24 +116,6 @@ unsigned char			filler_make_step(t_fd_reader *const sin,
 		return (1);
 	if (check_map(&map) || check_token(&token))
 		return (1);
-
-	if (player_n)
-		;
-	// Check section
-//	printf("Map size: %u %u\n", map.y, map.x);
-//	for (unsigned i = 0; i < map.y; ++i) {
-//		for (unsigned j = 0; j < map.x; ++j)
-//			printf("%4c|", map.raw[i][j]);
-//		printf("\n");
-//	}
-//	printf("Token size: %u %u\n", token.y, token.x);
-//	for (unsigned i = 0; i < token.y; ++i) {
-//		for (unsigned j = 0; j < token.x; ++j)
-//			printf("%c", token.raw[i][j]);
-//		printf("\n");
-//	}
-	// Check section ends
-
 	if (filler_mark_map(&map))
 		return (1);
 	filler_print_best_position(&map, &token, -1, 0);

@@ -17,7 +17,6 @@ static unsigned char	init_bfs_list(t_bfs_list *const list, const size_t size)
 	list->x = (unsigned *)malloc(size * sizeof(unsigned));
 	list->y = (unsigned *)malloc(size * sizeof(unsigned));
 	list->mark = (unsigned *)malloc(size * sizeof(unsigned));
-
 	if (!list->x || !list->y || !list->mark)
 		return (1);
 	return (0);
@@ -106,22 +105,5 @@ unsigned char			filler_mark_map(t_filler_map *const map)
 	prepare_from_border_bfs(&bfs_list, map);
 	filler_bfs(&bfs_list, map);
 	fill_map_from_border_opponent_bfs(map);
-
-	//Check section
-//	printf("Map size: %u %u\n", map->y, map->x);
-//	for (unsigned i = 0; i < map->y; ++i) {
-//		for (unsigned j = 0; j < map->x; ++j)
-//			printf("%4d|", map->bfs[i][j]);
-//		printf("\n");
-//	}
-//	printf("Map size: %u %u\n", map->y, map->x);
-//	for (unsigned i = 0; i < map->y; ++i) {
-//		for (unsigned j = 0; j < map->x; ++j)
-//			printf("%4.1f|", map->points[i][j]);
-//		printf("\n");
-//	}
-//	fflush(stdin);
-	//Check section
-
 	return (0);
 }

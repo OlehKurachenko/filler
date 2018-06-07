@@ -21,7 +21,7 @@ static unsigned char	read_player_number(t_fd_reader *const sin)
 {
 	char			*line1;
 	unsigned char	player_number;
-	const char 		expected_line[] = "$$$ exec p";
+	const char		expected_line[] = "$$$ exec p";
 
 	line1 = sin->vt->read_line(sin);
 	if (!line1)
@@ -41,9 +41,9 @@ static unsigned char	read_player_number(t_fd_reader *const sin)
 	return (player_number);
 }
 
-int main(void)
+int						main(void)
 {
-    t_fd_reader		*sin;
+	t_fd_reader		*sin;
 	unsigned char	player_n;
 
 	sin = new_fd_reader(0, 2048);
@@ -58,15 +58,11 @@ int main(void)
 		perror("bad VM");
 		return (0);
 	}
-	// Debug
-	//ft_printf("debug: player number %d\n", player_n);
 	if (filler_run_game(sin, player_n))
 	{
 		perror("bad VM data");
 		return (0);
 	}
-
-	//ft_printf("Unfinished!\n");
 	sin->vt->del(&sin);
 	return (0);
 }

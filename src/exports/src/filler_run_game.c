@@ -15,9 +15,8 @@
 unsigned char	filler_run_game(t_fd_reader *const sin,
 	const unsigned char player_n)
 {
-	while (sin->vt->is_readable(sin)) {
+	while (sin->vt->is_readable(sin))
 		if (filler_make_step(sin, player_n) != 0)
 			return (1);
-	}
 	return (0);
 }
