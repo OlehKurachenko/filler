@@ -37,12 +37,12 @@ static void				preprate_to_opponent_bfs(t_bfs_list *const list,
 		j = 0;
 		while (j < map->x)
 		{
-			if (map->raw[i][j] == list->op_char)
+			if (map->raw[i][j] == map->op_char)
 			{
 				filler_push_bfs_list(list, j, i, 0);
 				map->bfs[i][j] = 0;
 			}
-			else if (map->raw[i][j] == list->my_char)
+			else if (map->raw[i][j] == map->my_char)
 				map->bfs[i][j] = 0;
 			else
 				map->bfs[i][j] = -1;
@@ -75,15 +75,12 @@ static void				fill_map_points_to_opponent_bfs(t_filler_map *const map)
 	}
 }
 
-unsigned char			filler_mark_map(t_filler_map *const map,
-	const unsigned char player_n)
+unsigned char			filler_mark_map(t_filler_map *const map)
 {
-	static t_bfs_list	bfs_list = {NULL, NULL, NULL, 0, 0, 0, 0};
+	static t_bfs_list	bfs_list = {NULL, NULL, NULL, 0, 0};
 
 	if (!bfs_list.x && init_bfs_list(&bfs_list, map->x * map->y))
 		return (1);
-	bfs_list.my_char = (player_n == 1) ? 'O' : 'X';
-	bfs_list.op_char = (player_n == 1) ? 'X' : 'O';
 	preprate_to_opponent_bfs(&bfs_list, map);
 	filler_bfs(&bfs_list, map);
 	fill_map_points_to_opponent_bfs(map);

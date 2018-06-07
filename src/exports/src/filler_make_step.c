@@ -103,9 +103,11 @@ static unsigned char 	check_token(t_filler_token *const token)
 unsigned char			filler_make_step(t_fd_reader *const sin,
 	const unsigned char player_n)
 {
-	static t_filler_map	map = {NULL, NULL, NULL, 0, 0};
+	static t_filler_map	map = {NULL, NULL, NULL, 0, 0, 0, 0};
 	static t_filler_token token = {NULL, 0, 0};
 
+	map.my_char = (player_n == 1) ? 'O' : 'X';
+	map.op_char = (player_n == 1) ? 'X' : 'O';
 	if (filler_read_raw_map(sin, &map))
 		return (1);
 	if (!token.raw && init_filler_token(&token, &map))
@@ -132,7 +134,7 @@ unsigned char			filler_make_step(t_fd_reader *const sin,
 	}
 	// Check section ends
 
-	if (filler_mark_map(&map, player_n))
+	if (filler_mark_map(&map))
 		return (1);
 
 	return (0);
