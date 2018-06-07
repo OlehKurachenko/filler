@@ -59,6 +59,11 @@ fclean: libfclean clean
 
 re: fclean all
 
+shortfclean:
+	rm -rf $(OBJ_DIR)
+
+shortre: shortfclean all
+
 $(LIBFT_PATH)/$(LIBFT_A):
 	make -C $(LIBFT_PATH)/ all
 
