@@ -17,17 +17,17 @@ static unsigned char	init_filler_map(t_filler_map *const map)
 	size_t	i;
 
 	map->raw = (char **)malloc(sizeof(char *) * map->y);
-	map->dfs = (unsigned **)malloc(sizeof(unsigned *) * map->y);
+	map->bfs = (int **)malloc(sizeof(int *) * map->y);
 	map->points = (double **)malloc(sizeof(double *) * map->y);
-	if (!map->raw || !map->dfs || !map->points)
+	if (!map->raw || !map->bfs || !map->points)
 		return (1);
 	i = 0;
 	while (i < map->y)
 	{
 		map->raw[i] = (char *)malloc(sizeof(char) * (map->x + 1));
-		map->dfs[i] = (unsigned *)malloc(sizeof(unsigned) * map->x);
+		map->bfs[i] = (int *)malloc(sizeof(int) * map->x);
 		map->points[i] = (double *)malloc(sizeof(double) * map->x);
-		if (!map->points[i] || !map->raw[i] || !map->dfs[i])
+		if (!map->points[i] || !map->raw[i] || !map->bfs[i])
 			return (1);
 		++i;
 	}

@@ -121,7 +121,7 @@ unsigned char			filler_make_step(t_fd_reader *const sin,
 	printf("Map size: %u %u\n", map.y, map.x);
 	for (unsigned i = 0; i < map.y; ++i) {
 		for (unsigned j = 0; j < map.x; ++j)
-			printf("%c", map.raw[i][j]);
+			printf("%4c|", map.raw[i][j]);
 		printf("\n");
 	}
 	printf("Token size: %u %u\n", token.y, token.x);
@@ -131,6 +131,9 @@ unsigned char			filler_make_step(t_fd_reader *const sin,
 		printf("\n");
 	}
 	// Check section ends
+
+	if (filler_mark_map(&map, player_n))
+		return (1);
 
 	return (0);
 }
