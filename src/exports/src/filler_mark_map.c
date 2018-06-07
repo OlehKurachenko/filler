@@ -75,6 +75,25 @@ static void				fill_map_points_to_opponent_bfs(t_filler_map *const map)
 	}
 }
 
+static void				fill_map_from_border_opponent_bfs(
+	t_filler_map *const map)
+{
+	size_t i;
+	size_t j;
+
+	i = 0;
+	while (i < map->y)
+	{
+		j = 0;
+		while (j < map->x)
+		{
+			map->points[i][j] += g_distance_from_border_w * map->bfs[i][j];
+			++j;
+		}
+		++i;
+	}
+}
+
 unsigned char			filler_mark_map(t_filler_map *const map)
 {
 	static t_bfs_list	bfs_list = {NULL, NULL, NULL, 0, 0};
@@ -84,6 +103,9 @@ unsigned char			filler_mark_map(t_filler_map *const map)
 	preprate_to_opponent_bfs(&bfs_list, map);
 	filler_bfs(&bfs_list, map);
 	fill_map_points_to_opponent_bfs(map);
+	prepare_from_border_bfs(&bfs_list, map);
+	filler_bfs(&bfs_list, map);
+	fill_map_from_border_opponent_bfs(map);
 
 	//Check section
 //	printf("Map size: %u %u\n", map->y, map->x);

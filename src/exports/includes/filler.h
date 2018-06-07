@@ -77,4 +77,7 @@ void				filler_push_bfs_list(t_bfs_list *const list,
 void				filler_print_best_position(t_filler_map *const map,
 		t_filler_token *const token, double best_points, double points);
 
+void				prepare_from_border_bfs(t_bfs_list *const list,
+		t_filler_map *const map);
+
 #endif

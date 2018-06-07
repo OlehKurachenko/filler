@@ -28,7 +28,8 @@ SRC_N =	main.c \
 		filler_push_bfs_list.c \
 		filler_bfs.c \
 		filler_mark_map.c \
-		filler_print_best_position.c
+		filler_print_best_position.c \
+		fillit_bfs_layer_2.c
 
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC_N:.c=.o))
 
