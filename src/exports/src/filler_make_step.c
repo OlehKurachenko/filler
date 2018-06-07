@@ -12,28 +12,6 @@
 
 #include "../includes/filler.h"
 
-static unsigned char	init_filler_map(t_filler_map *const map)
-{
-	size_t	i;
-
-	map->raw = (char **)malloc(sizeof(char *) * map->y);
-	map->dfs = (unsigned **)malloc(sizeof(unsigned *) * map->y);
-	map->points = (double **)malloc(sizeof(double *) * map->y);
-	if (!map->raw || !map->dfs || !map->points)
-		return (1);
-	i = 0;
-	while (i < map->y)
-	{
-		map->raw[i] = (char *)malloc(sizeof(char) * (map->x + 1));
-		map->dfs[i] = (unsigned *)malloc(sizeof(unsigned) * map->x);
-		map->points[i] = (double *)malloc(sizeof(double) * map->x);
-		if (!map->points[i] || !map->raw[i] || !map->dfs[i])
-			return (1);
-		++i;
-	}
-	return (0);
-}
-
 static unsigned char	init_filler_token(t_filler_token *const token,
 	t_filler_map *const map)
 {
@@ -53,39 +31,8 @@ static unsigned char	init_filler_token(t_filler_token *const token,
 	return (0);
 }
 
-static unsigned char	read_raw_map(t_fd_reader *const sin,
-	t_filler_map *const map)
-{
-	char 	dummy_buffer[7];
-	size_t	i;
-
-	ft_memset(dummy_buffer, 0, 7);
-	sin->vt->read_line_to_array(sin, dummy_buffer, 7);
-	if (!ft_strnequ(dummy_buffer, "Plateau", 7))
-		return (1);
-	map->y = (unsigned)sin->vt->read_llint(sin);
-	map->x = (unsigned)sin->vt->read_llint(sin);
-	if (!(map->x) || !(map->y))
-		return (1);
-	if (!map->raw)
-		if (init_filler_map(map))
-			return (1);
-	sin->vt->pass_line(sin);
-	sin->vt->pass_line(sin);
-	i = 0;
-	while (i < map->y)
-	{
-		sin->vt->read_line_to_array(sin, dummy_buffer, 4);
-		sin->vt->read_line_to_array(sin, map->raw[i], map->x + 1);
-		if (map->raw[i][map->x] || ft_strlen(map->raw[i]) != map->x)
-			return (1);
-		++i;
-	}
-	return (0);
-}
-
 static unsigned char	read_raw_token(t_fd_reader *const sin,
-	t_filler_token *const token)
+	t_filler_token *const token, t_filler_map *const map)
 {
 	char 	dummy_buffer[5];
 	size_t	i;
@@ -96,7 +43,7 @@ static unsigned char	read_raw_token(t_fd_reader *const sin,
 		return (1);
 	token->y = (unsigned)sin->vt->read_llint(sin);
 	token->x = (unsigned)sin->vt->read_llint(sin);
-	if (!(token->x) || !(token->y))
+	if (!(token->x) || !(token->y) || token->x > map->x || token->y > map->y)
 		return (1);
 	sin->vt->pass_line(sin);
 	i = 0;
@@ -110,17 +57,62 @@ static unsigned char	read_raw_token(t_fd_reader *const sin,
 	return (0);
 }
 
+static unsigned char	check_map(t_filler_map *const map)
+{
+	size_t i;
+	size_t j;
+
+	i = 0;
+	while (i < map->y)
+	{
+		j = 0;
+		while (j < map->x)
+		{
+			map->raw[i][j] = (map->raw[i][j] == 'x') ? 'X' : map->raw[i][j];
+			map->raw[i][j] = (map->raw[i][j] == 'o') ? 'O' : map->raw[i][j];
+			if (!(map->raw[i][j] == '.' || map->raw[i][j] == 'O'
+					|| map->raw[i][j] == 'X'))
+				return (1);
+			++j;
+		}
+		++i;
+	}
+	return (0);
+}
+
+static unsigned char 	check_token(t_filler_token *const token)
+{
+	size_t i;
+	size_t j;
+
+	i = 0;
+	while (i < token->y)
+	{
+		j = 0;
+		while (j < token->x)
+		{
+			if (!(token->raw[i][j] == '.' || token->raw[i][j] == '*'))
+				return (1);
+			++j;
+		}
+		++i;
+	}
+	return (0);
+}
+
 unsigned char			filler_make_step(t_fd_reader *const sin,
 	const unsigned char player_n)
 {
 	static t_filler_map	map = {NULL, NULL, NULL, 0, 0};
 	static t_filler_token token = {NULL, 0, 0};
 
-	if (read_raw_map(sin, &map))
+	if (filler_read_raw_map(sin, &map))
 		return (1);
 	if (!token.raw && init_filler_token(&token, &map))
 		return (1);
-	if (read_raw_token(sin, &token))
+	if (read_raw_token(sin, &token, &map))
+		return (1);
+	if (check_map(&map) || check_token(&token))
 		return (1);
 
 	if (player_n)

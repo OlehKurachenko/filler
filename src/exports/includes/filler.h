@@ -49,4 +49,11 @@ unsigned char		filler_run_game(t_fd_reader *const sin,
 unsigned char		filler_make_step(t_fd_reader *const sin,
 		const unsigned char player_n);
 
+/*
+**	Also initialize map arrays it they are not yet initialized
+*/
+
+unsigned char		filler_read_raw_map(t_fd_reader *const sin,
+		t_filler_map *const map);
+
 #endif
