@@ -64,13 +64,17 @@ unsigned char		filler_make_step(t_fd_reader *const sin,
 */
 
 unsigned char		filler_read_raw_map(t_fd_reader *const sin,
-		t_filler_map *const map);
+	t_filler_map *const map);
 
-unsigned char			filler_mark_map(t_filler_map *const map);
+unsigned char		filler_mark_map(t_filler_map *const map);
 
-void		filler_bfs(t_bfs_list *const list, t_filler_map *const map);
+void				filler_bfs(t_bfs_list *const list,
+	t_filler_map *const map);
 
-void	filler_push_bfs_list(t_bfs_list *const list, const unsigned x,
-		const unsigned y, const unsigned mark);
+void				filler_push_bfs_list(t_bfs_list *const list,
+	const unsigned x, const unsigned y, const unsigned mark);
+
+void				filler_print_best_position(t_filler_map *const map,
+		t_filler_token *const token, double best_points, double points);
 
 #endif

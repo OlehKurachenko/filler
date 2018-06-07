@@ -86,19 +86,19 @@ unsigned char			filler_mark_map(t_filler_map *const map)
 	fill_map_points_to_opponent_bfs(map);
 
 	//Check section
-	printf("Map size: %u %u\n", map->y, map->x);
-	for (unsigned i = 0; i < map->y; ++i) {
-		for (unsigned j = 0; j < map->x; ++j)
-			printf("%4d|", map->bfs[i][j]);
-		printf("\n");
-	}
-	printf("Map size: %u %u\n", map->y, map->x);
-	for (unsigned i = 0; i < map->y; ++i) {
-		for (unsigned j = 0; j < map->x; ++j)
-			printf("%4.1f|", map->points[i][j]);
-		printf("\n");
-	}
-	fflush(stdin);
+//	printf("Map size: %u %u\n", map->y, map->x);
+//	for (unsigned i = 0; i < map->y; ++i) {
+//		for (unsigned j = 0; j < map->x; ++j)
+//			printf("%4d|", map->bfs[i][j]);
+//		printf("\n");
+//	}
+//	printf("Map size: %u %u\n", map->y, map->x);
+//	for (unsigned i = 0; i < map->y; ++i) {
+//		for (unsigned j = 0; j < map->x; ++j)
+//			printf("%4.1f|", map->points[i][j]);
+//		printf("\n");
+//	}
+//	fflush(stdin);
 	//Check section
 
 	return (0);

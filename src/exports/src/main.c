@@ -59,14 +59,14 @@ int main(void)
 		return (0);
 	}
 	// Debug
-	ft_printf("debug: player number %d\n", player_n);
+	//ft_printf("debug: player number %d\n", player_n);
 	if (filler_run_game(sin, player_n))
 	{
 		perror("bad VM data");
 		return (0);
 	}
 
-	ft_printf("Unfinished!\n");
+	//ft_printf("Unfinished!\n");
 	sin->vt->del(&sin);
 	return (0);
 }

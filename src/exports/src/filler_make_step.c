@@ -120,22 +120,22 @@ unsigned char			filler_make_step(t_fd_reader *const sin,
 	if (player_n)
 		;
 	// Check section
-	printf("Map size: %u %u\n", map.y, map.x);
-	for (unsigned i = 0; i < map.y; ++i) {
-		for (unsigned j = 0; j < map.x; ++j)
-			printf("%4c|", map.raw[i][j]);
-		printf("\n");
-	}
-	printf("Token size: %u %u\n", token.y, token.x);
-	for (unsigned i = 0; i < token.y; ++i) {
-		for (unsigned j = 0; j < token.x; ++j)
-			printf("%c", token.raw[i][j]);
-		printf("\n");
-	}
+//	printf("Map size: %u %u\n", map.y, map.x);
+//	for (unsigned i = 0; i < map.y; ++i) {
+//		for (unsigned j = 0; j < map.x; ++j)
+//			printf("%4c|", map.raw[i][j]);
+//		printf("\n");
+//	}
+//	printf("Token size: %u %u\n", token.y, token.x);
+//	for (unsigned i = 0; i < token.y; ++i) {
+//		for (unsigned j = 0; j < token.x; ++j)
+//			printf("%c", token.raw[i][j]);
+//		printf("\n");
+//	}
 	// Check section ends
 
 	if (filler_mark_map(&map))
 		return (1);
-
+	filler_print_best_position(&map, &token, -1, 0);
 	return (0);
 }
